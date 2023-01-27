@@ -5,7 +5,7 @@
     "node": true,
     "jest": true
   },
-  "extends": "xo",
+  "extends": ["xo", "prettier"],
   "overrides": [
     {
       "extends": ["xo-typescript"],

@@ -5,7 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "jest --watchAll"
+    "test": "jest --watchAll --coverage",
+    "prepare": "husky install",
+    "test:prod": "jest --watchAll --coverage --watchAll=false",
+    "prepare": "husky install"
   },
   "author": "Carlos Ruiz",
   "license": "ISC",
