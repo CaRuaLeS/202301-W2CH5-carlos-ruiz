@@ -7,7 +7,8 @@
   "scripts": {
     "test": "jest --watchAll --coverage",
     "prepare": "husky install",
-    "test:prod": "jest --watchAll --coverage --watchAll=false"
+    "test:prod": "jest --watchAll --coverage --watchAll=false",
+    "start": "tsc -watch"
   },
   "author": "Carlos Ruiz",
   "license": "ISC",
