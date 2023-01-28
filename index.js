@@ -1,9 +1,11 @@
-function buildGrid(columns, rows) {
-  const gridArray = new Array(columns)
-    .fill(null)
-    .map(() => new Array(rows).fill(0));
+export const buildGrid = (columns, rows) => {
+  let grid = [];
+  grid = new Array(columns);
+  for (let i = 0; i < grid.length; i++) {
+    grid[i] = new Array(rows).fill(0);
+  }
 
-  return gridArray;
-}
+  return grid;
+};
 
-console.log(buildGrid(3, 4));
+// Console.log(buildGrid(1, 4));
