@@ -5,7 +5,7 @@ export const buildGrid = (rows, columns) => {
   grid = new Array(rows).fill(0);
   for (let i = 0; i < grid.length; i++) {
     // Add to each element of the array another array to make a grid
-    grid[i] = new Array(columns).fill(0);
+    grid[i] = Array.from({ length: columns }, () => 0);
   }
 
   return grid;
@@ -13,35 +13,20 @@ export const buildGrid = (rows, columns) => {
 
 // Add a cell on specific index, only array 2D
 export const addCell = (arr, row, column) => {
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr.length; j++) {
-      arr[row][column] = 1;
-    }
-  }
-
-  // A for (const i of arr) {
-  //   for (const j of arr) {
-  //     arr[column][row] = 1;
-  //   }
-  // }
+  arr[row][column] = 1;
 };
 
 // Delete a cell on specific index, only array 2D
 export const deleteCell = (arr, row, column) => {
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr.length; j++) {
-      if (arr[row][column] === 1) {
-        arr[row][column] = 0;
-      }
-    }
-  }
+  arr[row][column] = 0;
 };
 
 // Check positions around an alive cell (1)
 export const checkNeighbours = (arr, row, column) => {
+  let livingCells = 0;
   // Dimensions of the grid
-  const rowMax = arr.length;
-  const colMax = arr[0].length;
+  const rowMax = arr.length - 1;
+  const colMax = arr[0].length - 1;
   // Check the neighbours of a 2D array map position
   for (let i = Math.max(0, row - 1); i <= Math.min(row + 1, rowMax); i++) {
     for (
@@ -51,28 +36,51 @@ export const checkNeighbours = (arr, row, column) => {
     ) {
       // Do something
       if (i !== row || j !== column) {
-        console.log('Vecino ' + i, j);
-        arr[i][j] = 2;
+        if (arr[i][j] === 1) {
+          livingCells++;
+        }
       }
     }
   }
+
+  return livingCells;
 };
 
-// Checks the positions of the 2D grid, if they are alive (1)
-export const checkLivingCell = (arr) => {
+// Checks the positions of the 2D grid
+export const checkCells = (arr) => {
+  let nextArrayMap = arr.map((row) => [...row]);
+
   for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr.length; j++) {
-      if (arr[i][j] === 1) {
-        // Gives the position that is alive in the 2D grid
-        console.log('Living cell: ' + arr[i][j], i, j);
-        checkNeighbours(arr, i, j);
-      }
+    for (let j = 0; j < arr[i].length; j++) {
+      const livingCells = checkNeighbours(arr, i, j);
+
+      nextArrayMap = cellsConditions(livingCells, nextArrayMap, i, j);
     }
   }
+
+  return nextArrayMap;
 };
 
-const grid = buildGrid(5, 4);
+export const cellsConditions = (numLivingCells, arr, row, column) => {
+  // Const newArray = [...arr];
+
+  if (arr[row][column] === 1) {
+    if (numLivingCells < 2 || numLivingCells > 3) {
+      arr[row][column] = 0;
+    }
+  } else if (numLivingCells === 3) {
+    arr[row][column] = 1;
+  }
+
+  return arr;
+};
+
+const grid = buildGrid(6, 6);
 console.log(grid);
 addCell(grid, 2, 1);
-checkLivingCell(grid);
+addCell(grid, 2, 2);
+addCell(grid, 2, 3);
+addCell(grid, 3, 3);
 console.log(grid);
+const newArray = checkCells(grid);
+console.log(newArray);
