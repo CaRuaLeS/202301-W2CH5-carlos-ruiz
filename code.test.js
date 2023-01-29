@@ -95,12 +95,6 @@ describe('Given the function to create a grid', () => {
         ];
         playGame(grid, 2);
         jest.advanceTimersByTime(800);
-
-        // PlayGame(grid);
-        // expect(checkCells()).toHaveBeenCalled(1);
-        // const value = playGame(grid, 1);
-        // expect(clearInterval).toBeInstanceOf();
-
         expect(grid).toBeInstanceOf(Array);
       });
     });

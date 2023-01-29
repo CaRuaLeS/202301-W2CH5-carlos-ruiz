@@ -80,7 +80,7 @@ export const playGame = (array, maxRounds) => {
   const init = setInterval(() => {
     array = checkCells(array);
     i++;
-    // Console.log(array);
+    console.log(array);
     if (i >= maxRounds) {
       clearInterval(init);
     }
