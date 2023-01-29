@@ -99,6 +99,8 @@ describe('Given the function to create a grid', () => {
         // PlayGame(grid);
         // expect(checkCells()).toHaveBeenCalled(1);
         // const value = playGame(grid, 1);
+        // expect(clearInterval).toBeInstanceOf();
+
         expect(grid).toBeInstanceOf(Array);
       });
     });
