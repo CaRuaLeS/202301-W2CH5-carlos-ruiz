@@ -75,12 +75,20 @@ export const cellsConditions = (numLivingCells, arr, row, column) => {
   return arr;
 };
 
+const playGame = (array) => {
+  setInterval(() => {
+    array = checkCells(array);
+    console.log(array);
+  }, 700);
+};
+
 const grid = buildGrid(6, 6);
-console.log(grid);
 addCell(grid, 2, 1);
 addCell(grid, 2, 2);
 addCell(grid, 2, 3);
-addCell(grid, 3, 3);
+addCell(grid, 5, 4);
+addCell(grid, 4, 1);
+addCell(grid, 4, 0);
 console.log(grid);
-const newArray = checkCells(grid);
-console.log(newArray);
+
+playGame(grid);
