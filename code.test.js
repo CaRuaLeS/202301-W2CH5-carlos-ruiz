@@ -5,7 +5,12 @@ import {
   checkNeighbours,
   cellsConditions,
   checkCells,
+  playGame,
+  loop,
 } from './structure';
+
+jest.useFakeTimers();
+jest.spyOn(global, 'clearInterval');
 
 describe('Given the function to create a grid', () => {
   describe('When the grid has two values', () => {
@@ -46,6 +51,17 @@ describe('Given the function to create a grid', () => {
       expect(value).toBe(1);
     });
   });
+  describe('When the grid has no living cells', () => {
+    test('Then if we check the surroundings it checks 0 living cell ass neightbour', () => {
+      const grid = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+      ];
+      const value = checkNeighbours(grid, 1, 1);
+      expect(value).toBe(0);
+    });
+  });
   describe('When the grid has 3 living cells nearby', () => {
     test('Then it checks the surroundings and a new cell borns', () => {
       const grid = [
@@ -80,6 +96,44 @@ describe('Given the function to create a grid', () => {
         [0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0],
       ]);
+    });
+  });
+  describe('When the grid is set', () => {
+    test('Then if we execute the code in the loop section', () => {
+      const grid = [
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0, 0],
+        [0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+      ];
+      loop(grid);
+      expect(grid).toBeInstanceOf(Array);
+    });
+    test('Then if we execute the code set timer', () => {
+      const grid = [
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0, 0],
+        [0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+      ];
+      playGame(grid, 1);
+      expect(grid).toBeInstanceOf(Array);
+    });
+    test('Then if we execute the code setInterval', () => {
+      const grid = [
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0, 0],
+        [0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+      ];
+      playGame(grid, 1);
+      expect(clearInterval).toHaveBeenCalledTimes(0);
     });
   });
 });
