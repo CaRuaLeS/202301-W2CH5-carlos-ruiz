@@ -75,10 +75,15 @@ export const cellsConditions = (numLivingCells, arr, row, column) => {
   return arr;
 };
 
-const playGame = (array) => {
-  setInterval(() => {
+const playGame = (array, maxRounds) => {
+  let i = 0;
+  const init = setInterval(() => {
     array = checkCells(array);
+    i++;
     console.log(array);
+    if (i >= maxRounds) {
+      clearInterval(init);
+    }
   }, 700);
 };
 
@@ -91,4 +96,4 @@ addCell(grid, 4, 1);
 addCell(grid, 4, 0);
 console.log(grid);
 
-playGame(grid);
+playGame(grid, 5);
