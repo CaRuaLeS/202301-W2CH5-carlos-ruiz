@@ -99,9 +99,18 @@ describe('Given the function to create a grid', () => {
     });
   });
   describe('When the grid is set', () => {
-    // BeforeEach(() => {
-    //   jest.useFakeTimers('legacy');
-    // });
+    test('Then if we execute the code in the loop section', () => {
+      const grid = [
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0, 0],
+        [0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0],
+      ];
+      loop(grid);
+      expect(grid).toBeInstanceOf(Array);
+    });
     test('Then if we execute the code set timer', () => {
       const grid = [
         [0, 0, 0, 0, 0, 0],
