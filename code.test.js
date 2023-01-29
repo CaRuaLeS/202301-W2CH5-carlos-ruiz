@@ -10,6 +10,7 @@ import {
 } from './structure';
 
 jest.useFakeTimers();
+jest.spyOn(global, 'clearInterval');
 
 describe('Given the function to create a grid', () => {
   describe('When the grid has two values', () => {
@@ -122,9 +123,8 @@ describe('Given the function to create a grid', () => {
         [0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0],
       ];
-      loop(grid);
-      jest.advanceTimersByTime(700);
-      expect(setInterval).toHaveBeenCalled();
+      playGame(grid, 1);
+      expect(clearInterval).toHaveBeenCalledTimes(0);
     });
   });
 });

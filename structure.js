@@ -79,6 +79,7 @@ export const playGame = (array, maxRounds) => {
   let count = 0;
   const intervalRounds = setInterval(() => {
     loop(array);
+
     // Console.log(count);
     count++;
     if (count >= maxRounds) {
@@ -89,7 +90,7 @@ export const playGame = (array, maxRounds) => {
 
 export function loop(array) {
   array = checkCells(array);
-  // Console.log(array);
+  return array;
 }
 
 const grid = buildGrid(6, 6);
