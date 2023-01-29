@@ -5,7 +5,9 @@ import {
   checkNeighbours,
   cellsConditions,
   checkCells,
+  playGame,
 } from './structure';
+jest.useFakeTimers();
 
 describe('Given the function to create a grid', () => {
   describe('When the grid has two values', () => {
@@ -80,6 +82,25 @@ describe('Given the function to create a grid', () => {
         [0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0],
       ]);
+    });
+    describe('When the grid is set', () => {
+      test('Then if we execute the code set timer', () => {
+        const grid = [
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 1, 1, 1, 0, 0],
+          [0, 0, 0, 1, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0],
+        ];
+        playGame(grid, 2);
+        jest.advanceTimersByTime(800);
+
+        // PlayGame(grid);
+        // expect(checkCells()).toHaveBeenCalled(1);
+        // const value = playGame(grid, 1);
+        expect(grid).toBeInstanceOf(Array);
+      });
     });
   });
 });
