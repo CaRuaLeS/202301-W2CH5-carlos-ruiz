@@ -78,8 +78,7 @@ export const cellsConditions = (numLivingCells, arr, row, column) => {
 export const playGame = (array, maxRounds) => {
   let count = 0;
   const intervalRounds = setInterval(() => {
-    loop(array);
-
+    array = loop(array);
     count++;
     if (count >= maxRounds) {
       clearInterval(intervalRounds);
@@ -100,3 +99,4 @@ addCell(grid, 5, 4);
 addCell(grid, 4, 1);
 addCell(grid, 4, 0);
 console.log(grid);
+playGame(grid, 1);
